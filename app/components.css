@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "./globals.css";
+
+
+@layer utilities{
+
+     .title-text{
+        @apply  font-anton text-[clamp(1.75rem,6vw,9rem)]  w-fit leading-[100%] text-center uppercase;
+    }
+
+    .absolute-center{
+        @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+    }
+}
