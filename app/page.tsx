@@ -1,13 +1,31 @@
-import Preloader from '@/components/Preloader'
-import React from 'react'
+"use client"
 
-const page = () => {
+import Preloader from '@/components/Preloader'
+import React, {  useEffect, useState } from 'react'
+
+const Page = () => {
+  const [loadPreLoader, setloadPreLoader] = useState(false);
+
+    useEffect(()=>{
+      const hasPlayed = sessionStorage.getItem("preLoaderPlayed");
+
+      if(!hasPlayed){
+        requestAnimationFrame(() => {
+        setloadPreLoader(true);
+      });
+      }
+    },[])
+
+
   return (
     <div>
-      <Preloader/>
+      {
+        loadPreLoader && <Preloader onComplete={()=>setloadPreLoader(false)} />
+      }
+      
       Hell
     </div>
   )
 }
 
-export default page
+export default Page

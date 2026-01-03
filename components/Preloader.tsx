@@ -7,7 +7,7 @@ import '@/app/globals.css'
 import '@/app/components.css'
 import gsap from 'gsap'
 
-const Preloader = () => {
+const Preloader = ({onComplete}: {onComplete?: ()=> void}) => {
 
   const [showLoader, setShowLoader] = useState(true);
   const [logoLoader, setLogoLoader] = useState(false);
@@ -39,6 +39,7 @@ const Preloader = () => {
         onComplete: ()=> {
           setShowLoader(false);
           setLogoLoader(true);
+        
         }
       });
 
@@ -49,14 +50,14 @@ const Preloader = () => {
       tl.to(preloadSpamRef.current, {
        
         y:0,
-        duration: 0.5,
+        duration: 0.75,
         stagger: 0.05
       })
 
       tl.to(preloadSpamRef.current, {
         
-        y: -200,
-        duration: 1,
+        y: "-100%",
+        duration: 0.75,
         stagger: {
           each: 0.05,
           from: "end"
@@ -79,13 +80,17 @@ const Preloader = () => {
         gsap.to(preloadBoxRef.current,{
             height: 0,
             duration: 1,
-            ease: "power3.inOut"
+            ease: "expo.in",
+            onComplete: ()=>{
+              onComplete?.();
+              sessionStorage.setItem("preLoaderPlayed", "true");
+            }
         })
     })
 
     return ()=> ctx.revert();
 
-  }, [svgComplete])
+  }, [svgComplete, onComplete])
 
 
 
@@ -100,14 +105,16 @@ const Preloader = () => {
             preLoadArray.map((value, index)=>(
               <span ref={(el) => {
                 preloadSpamRef.current[index] = el
-              }} key={index} className='inline-block translate-y-50'>{value}</span>
+              }} key={index} className='inline-block translate-y-full'>{value}</span>
             ))
           }
         </h2>
         }
         {logoLoader && !svgComplete &&(
 
-          <LogoPaths onComplete={()=> setsvgComplete(true)}/>
+          <LogoPaths onComplete={()=> {
+            setsvgComplete(true);
+          }}/>
         )
         }
       </div>    
