@@ -4,10 +4,7 @@ import Preloader from '@/components/Preloader'
 import React, {  useEffect, useState } from 'react'
 
 const Page = () => {
-  const [loadPreLoader, setloadPreLoader] = useState(() =>
-  !!sessionStorage.getItem("preLoaderPlayed") ? false : true
-);
-    // const [checkDone, setCheckDone] = useState(false);
+  const [loadPreLoader, setloadPreLoader] = useState(false);
 
     useEffect(()=>{
       const hasPlayed = sessionStorage.getItem("preLoaderPlayed");
@@ -21,7 +18,7 @@ const Page = () => {
     
     },[])
 
-    //  if (!checkDone) return null;
+  
   return (
     <div>
       {
