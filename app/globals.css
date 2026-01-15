@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+body{
+    background-color: #E6E6DC;
+    overflow-x:hidden ;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
 
 
 @font-face {
@@ -9,10 +17,55 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Manrope";
+    src: url("../public/fonts/Manrope-Regular.woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Manrope";
+    src: url("../public/fonts/Manrope-Medium.woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Manrope";
+    src: url("../public/fonts/Manrope-SemiBold.woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Manrope";
+    src: url("../public/fonts/Manrope-Bold.woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
 @theme{
     --color-primary: #f5f5f0;
     --color-secondary: #141415;
+    --color-accent: #E6E6DC;
+    --color-border: #D4D4CB;
+    --color-text: #C9C5B1;
 
+   
+    --navbar-height: 100px;
+    
     --font-anton: "Anton", sans-serif;
+    --font-manrope: "Manrope", sans-serif;
+
+    --spacing-xs: 8px; 
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-sem: 22px;
+    --spacing-lg: 28px;
+    --spacing-hg: 32px;
+
 }
+
+
 

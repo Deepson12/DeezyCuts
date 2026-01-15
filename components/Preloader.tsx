@@ -97,7 +97,7 @@ const Preloader = ({onComplete}: {onComplete?: ()=> void}) => {
 
 
   return (
-    <div ref={preloadBoxRef} className='fixed w-screen h-screen bg-primary'>
+    <div ref={preloadBoxRef} className='z-10 fixed w-screen h-screen bg-primary'>
       <div className='absolute-center'>
         {showLoader && 
         <h2  className="title-text color-secondary w-fit h-fit overflow-hidden">

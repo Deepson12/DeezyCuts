@@ -2,13 +2,19 @@
 @import "./globals.css";
 
 
+
 @layer utilities{
 
      .title-text{
-        @apply  font-anton text-[clamp(1.75rem,6vw,9rem)]  w-fit leading-[100%] text-center uppercase;
+        @apply  font-anton text-[clamp(1.75rem,6vw,9rem)]  w-fit leading-[100%]  uppercase;
     }
 
     .absolute-center{
         @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
     }
+
+    .list-text{
+        @apply  font-anton text-[clamp(1.75rem,6vw,9rem)]  w-fit leading-none  uppercase hover:text-secondary cursor-pointer duration-300 hover:scale-y-110;
+    }
 }
+

@@ -1,7 +1,12 @@
 "use client"
 
+
+import Home from '../pages/Landing';
 import Preloader from '@/components/Preloader'
 import React, {  useEffect, useState } from 'react'
+import '@/app/globals.css'
+import '@/app/components.css'
+import ImageSec from '@/pages/ImageSec';
 
 const Page = () => {
   const [loadPreLoader, setloadPreLoader] = useState(false);
@@ -26,9 +31,12 @@ const Page = () => {
       }
       
       
-        <section>
-          Hell
-        </section>
+        <main>
+          
+         
+          <Home/>
+          <ImageSec/>
+        </main>
      
     </div>
   )
