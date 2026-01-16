@@ -13,6 +13,10 @@
         @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
     }
 
+    .title-text-white{
+        @apply  font-anton text-[clamp(3rem,7vw,8rem)]  w-fit leading-[100%]  uppercase text-accent;
+    }
+
     
 }
 

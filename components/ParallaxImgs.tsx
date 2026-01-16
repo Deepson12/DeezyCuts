@@ -19,21 +19,41 @@ const ParallaxImgs = ({src, alt}:ImageProps) => {
     const currentTranslateY = useRef(0);
     const targetTranslateY = useRef(0);
     const refId = useRef<number | null>(null);
+    const imageLoadedRef = useRef(false);
 
+    const updateBounds = ()=>{
+        if(imageRef.current){
+            const rect = imageRef.current.getBoundingClientRect();
+            bounds.current = {
+                top: rect.top + window.scrollY,
+                bottom: rect.bottom + window.scrollY
+            }
+        }
+    }
+
+    const handleImageLoad = () => {
+        if (!imageLoadedRef.current) {
+            imageLoadedRef.current = true;
+            updateBounds();
+            // Small delay to ensure layout is settled
+            requestAnimationFrame(() => {
+                updateBounds();
+            });
+        }
+    };
 
     useEffect(()=>{
        
-        const updateBounds = ()=>{
-            if(imageRef.current){
-                const rect = imageRef.current.getBoundingClientRect();
-                bounds.current = {
-                    top: rect.top + window.scrollY,
-                    bottom: rect.bottom + window.scrollY
-                }
-            }
-        }
-
+        // Initial bounds calculation - will be updated when image loads
         updateBounds();
+        
+        // Also try after a short delay in case image loads quickly
+        const timeoutId = setTimeout(() => {
+            if (!imageLoadedRef.current) {
+                updateBounds();
+            }
+        }, 100);
+
         window.addEventListener("resize", updateBounds);
 
         const handleScroll = ()=>{
@@ -77,6 +97,7 @@ const ParallaxImgs = ({src, alt}:ImageProps) => {
         return()=>{
             window.removeEventListener("resize", updateBounds);
             window.removeEventListener("scroll", handleScroll);
+            clearTimeout(timeoutId);
 
             if(refId.current){
                 cancelAnimationFrame(refId.current);
@@ -93,6 +114,7 @@ const ParallaxImgs = ({src, alt}:ImageProps) => {
         ref={imageRef}
         src={src}
         alt={alt}
+        onLoad={handleImageLoad}
         style={{
             willChange: "transform",
             transform: "translateY(0) scale(1.25)",

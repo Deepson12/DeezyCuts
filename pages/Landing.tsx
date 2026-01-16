@@ -3,7 +3,6 @@
 
 import ButtonUnd from '@/components/ButtonUnd'
 import ParallaxImgs from '@/components/ParallaxImgs'
-import Image from 'next/image'
 import React from 'react'
 
 const Landing = () => {

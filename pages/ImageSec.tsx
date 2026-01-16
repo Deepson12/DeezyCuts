@@ -9,7 +9,7 @@ const ImageSec = () => {
 
 
   return (
-    <div className='min-h-dvh bg-secondary  mt-[clamp(5rem,10vw,10rem)] text-accent'>
+    <div className=' bg-secondary  mt-[clamp(5rem,10vw,10rem)] text-accent'>
       <div className='pt-[clamp(5rem,10vw,10rem)] '>
 
       <Marquee direction='left' speed={150}>
