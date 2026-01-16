@@ -20,7 +20,7 @@ export default function RootLayout({
         className={` antialiased`}
       >
         
-         <Navbar/>
+        <Navbar/>
         <Cursor/>
         {children}
       </body>

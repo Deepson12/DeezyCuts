@@ -7,8 +7,15 @@ import React, {  useEffect, useState } from 'react'
 import '@/app/globals.css'
 import '@/app/components.css'
 import ImageSec from '@/pages/ImageSec';
+import {useLenis} from '@/components/useLenis'
+// import Navbar from '@/components/Navbar';
+
+
 
 const Page = () => {
+
+  useLenis();
+
   const [loadPreLoader, setloadPreLoader] = useState(false);
 
     useEffect(()=>{
@@ -23,6 +30,8 @@ const Page = () => {
     
     },[])
 
+   
+
   
   return (
     <div>
@@ -31,12 +40,12 @@ const Page = () => {
       }
       
       
-        <main>
+        
           
-         
+        
           <Home/>
           <ImageSec/>
-        </main>
+        
      
     </div>
   )
