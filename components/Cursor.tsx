@@ -85,6 +85,7 @@ const Cursor = () => {
 
 
   return (
+    
     <div ref={cursorRef} className='fixed z-20 h-15 w-15 shadow-[0_0_0_2px_var(--color-accent)] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none hidden lg:block mix-blend-difference'>
       
     </div>
