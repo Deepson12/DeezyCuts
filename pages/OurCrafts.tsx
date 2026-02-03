@@ -11,14 +11,14 @@ const OurCrafts = () => {
   const imgBoxRef = useRef<HTMLDivElement>(null);
 
   const styles = [
-    {cut: "Fade", img: "pic-1.jpg"},
-    {cut: "Fade", img: "pic-1.jpg"},
-    {cut: "Fade", img: "pic-1.jpg"},
-    {cut: "Fade", img: "pic-1.jpg"},
-    {cut: "Fade", img: "pic-1.jpg"},
-    {cut: "Fade", img: "pic-1.jpg"},
-    {cut: "Fade", img: "pic-1.jpg"},
-    {cut: "Fade", img: "pic-1.jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
+    {cut: "Fade", img: "pic-1 (1).jpg"},
    
   ]
 
@@ -45,21 +45,24 @@ const OurCrafts = () => {
       if (scrollDistance <= 0) return;
 
       
-      gsap.to(imgBox, {
+      const horizontalTween = gsap.to(imgBox, {
         x: -scrollDistance,
         ease: "none",
         scrollTrigger: {
+          id: "our",
           trigger: section,
           start: "top top",        
           end: `+=${scrollDistance}`, 
           scrub: 1,                 
-          pin: true,                
+          pin: true, 
+          invalidateOnRefresh: true               
         }
       });
     };
 
-    
+    ScrollTrigger.refresh();
     setTimeout(setupScroll, 100);
+
 
     
     return () => {

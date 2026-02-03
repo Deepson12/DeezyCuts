@@ -1,4 +1,8 @@
 @import "tailwindcss";
+*{
+    cursor: none;
+}
+
 
 body{
     background-color: #E6E6DC;
@@ -67,5 +71,22 @@ body{
 
 }
 
-
-
+.line {
+  width: 1px;
+  height: 100%;
+  background: #5b5b59;
+  -webkit-mask: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #141415 5%,
+    #141415 95%,
+    transparent 100%
+  );
+  mask: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #141415 5%,
+    #141415 95%,
+    transparent 100%
+  );
+}

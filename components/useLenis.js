@@ -17,18 +17,27 @@ export function useLenis() {
             gestureDirection: 'vertical'
         })
 
+    
+
         lenis.on('scroll', ScrollTrigger.update)
 
-        gsap.ticker.add((time)=>{
+        const raf = (time)=>{
             lenis.raf(time*1000)
-        })
+        }
+        gsap.ticker.add(raf)
 
         gsap.ticker.lagSmoothing(0)
 
+        const onRefresh = () => lenis.resize?.();
+        ScrollTrigger.addEventListener("refresh", onRefresh);
+        // Ensure initial measurements include Lenis
+        ScrollTrigger.refresh();
+
 
         return ()=>{
+            ScrollTrigger.removeEventListener("refresh", onRefresh);
             lenis.destroy()
-            gsap.ticker.remove(()=> lenis.raf())
+            gsap.ticker.remove(raf)
         }
     },[])
 }

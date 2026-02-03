@@ -11,6 +11,8 @@ import {useLenis} from '@/components/useLenis'
 import OurCrafts from '@/pages/OurCrafts';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
+import Pricing from '@/pages/Pricing';
+
 // import Navbar from '@/components/Navbar';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -74,9 +76,8 @@ const Page = () => {
           <Home/>
           <ImageSec/>
           <OurCrafts/>
-          <section className='h-screen'>
-
-          </section>
+          <Pricing/>
+        
      
     </div>
   )

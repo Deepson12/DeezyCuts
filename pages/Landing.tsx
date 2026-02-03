@@ -11,9 +11,9 @@ const Landing = () => {
 
   return (
     <section className='h-screen grid grid-cols-6 md:grid-cols-12 gap-10 px-md md:px-lg pb-lg bg-accent text-secondary'>
-      <div className='relative col-span-6 md:col-span-12 w-full h-130 overflow-hidden mt-(--navbar-height) img'>
+      <div className='relative col-span-6 md:col-span-12 w-full h-full overflow-hidden mt-(--navbar-height) img'>
         <ParallaxImgs
-          src={"/img/otdoor.jpg"}
+          src={"/img/otdoor (1).jpg"}
           alt='hero image'
         />
       </div>
