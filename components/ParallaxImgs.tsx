@@ -1,134 +1,64 @@
 "use client"
 
-import React, {useEffect, useRef} from 'react'
-import { useLenis } from './useLenis'
+import React, { useRef, useEffect } from 'react'
 import Image from 'next/image';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface ImageProps {
     src: string,
-    alt: string
+    alt: string,
+    priority?: boolean
 }
 
-
-const lerp = (start : number, end: number, factor: number) => start+ (end-start) * factor;
-
-const ParallaxImgs = ({src, alt}:ImageProps) => {
+const ParallaxImgs = ({src, alt, priority = false}: ImageProps) => {
     const imageRef = useRef<HTMLImageElement>(null);
 
-    const bounds =  useRef<{top: number, bottom: number} | null>(null)
-    const currentTranslateY = useRef(0);
-    const targetTranslateY = useRef(0);
-    const refId = useRef<number | null>(null);
-    const imageLoadedRef = useRef(false);
+    useEffect(() => {
+        const image = imageRef.current;
+        if (!image) return;
 
-    const updateBounds = ()=>{
-        if(imageRef.current){
-            const rect = imageRef.current.getBoundingClientRect();
-            bounds.current = {
-                top: rect.top + window.scrollY,
-                bottom: rect.bottom + window.scrollY
-            }
-        }
-    }
-
-    const handleImageLoad = () => {
-        if (!imageLoadedRef.current) {
-            imageLoadedRef.current = true;
-            updateBounds();
-            // Small delay to ensure layout is settled
-            requestAnimationFrame(() => {
-                updateBounds();
-            });
-        }
-    };
-
-    useEffect(()=>{
-       
-        // Initial bounds calculation - will be updated when image loads
-        updateBounds();
+        // Ensure ScrollTrigger is registered
+        gsap.registerPlugin(ScrollTrigger);
         
-        // Also try after a short delay in case image loads quickly
-        const timeoutId = setTimeout(() => {
-            if (!imageLoadedRef.current) {
-                updateBounds();
+        const parent = image.parentElement;
+        
+        const ctx = gsap.context(() => {
+            if (parent) {
+                gsap.fromTo(image, 
+                    { y: "-10%" },
+                    { 
+                        y: "10%", 
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: parent,
+                            start: "top bottom", 
+                            end: "bottom top",   
+                            scrub: 1, // Add some smoothing to match the previous lerp feel
+                        }
+                    }
+                );
             }
-        }, 100);
+        }, parent || undefined);
 
-        window.addEventListener("resize", updateBounds);
-
-        const handleScroll = ()=>{
-            
-
-            if(bounds.current && imageRef.current){
-                const scrollY = window.scrollY;
-                const elementTop = bounds.current.top;
-                const elementHeight = bounds.current.bottom - bounds.current.top;
-                const windowHeight = window.innerHeight;
-                
-                
-                const elementCenter = elementTop + elementHeight / 2;
-                const viewportCenter = scrollY + windowHeight / 2;
-                const distanceFromCenter = viewportCenter - elementCenter;
-                const maxDistance = (windowHeight + elementHeight) / 2;
-                const progress = distanceFromCenter / maxDistance;
-                
-                
-                targetTranslateY.current = progress * 100;
-            }
-        }
-
-        window.addEventListener("scroll", handleScroll);
-
-        const animate = ()=>{
-            if(imageRef.current){
-                currentTranslateY.current = lerp(currentTranslateY.current, targetTranslateY.current, 0.1);
-
-                if(Math.abs(currentTranslateY.current-targetTranslateY.current)> 0.01){
-                    imageRef.current.style.transform =`translateY(${currentTranslateY.current}px) scale(1.25)`;
-                }
-            }
-
-            refId.current =requestAnimationFrame(animate);
-        }
-
-
-        animate();
-
-        return()=>{
-            window.removeEventListener("resize", updateBounds);
-            window.removeEventListener("scroll", handleScroll);
-            clearTimeout(timeoutId);
-
-            if(refId.current){
-                cancelAnimationFrame(refId.current);
-            }
-        }
+        return () => {
+            ctx.revert();
+        };
     }, []);
 
-
-    useLenis();
-  return (
-
-
-    <Image 
-        ref={imageRef}
-        src={src}
-        alt={alt}
-        onLoad={handleImageLoad}
-        style={{
-            willChange: "transform",
-            transform: "translateY(0) scale(1.25)",
-            objectPosition: 'center 50%'
-        }}
-        fill
-          sizes="80vw"
-          quality={90}
-          className='object-cover absolute'
-          priority
-          
-
-    />
-  )
+    return (
+        <Image 
+            ref={imageRef}
+            src={src}
+            alt={alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={90}
+            className='object-cover'
+            style={{ transform: 'scale(1.25)' }}
+            priority={priority}
+        />
+    )
 }
 
 export default ParallaxImgs

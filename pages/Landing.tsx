@@ -1,4 +1,4 @@
-"use-client"
+"use client"
 
 
 import ButtonUnd from '@/components/ButtonUnd'
@@ -15,6 +15,7 @@ const Landing = () => {
         <ParallaxImgs
           src={"/img/otdoor (1).jpg"}
           alt='hero image'
+          priority={true}
         />
       </div>
 

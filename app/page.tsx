@@ -6,12 +6,15 @@ import Preloader from '@/components/Preloader'
 import React, {  useEffect, useState } from 'react'
 import '@/app/globals.css'
 import '@/app/components.css'
-import ImageSec from '@/pages/ImageSec';
 import {useLenis} from '@/components/useLenis'
-import OurCrafts from '@/pages/OurCrafts';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
-import Pricing from '@/pages/Pricing';
+import dynamic from 'next/dynamic';
+import Testmonial from '@/pages/Testmonial';
+
+const ImageSec = dynamic(() => import('@/pages/ImageSec'));
+const OurCrafts = dynamic(() => import('@/pages/OurCrafts'));
+const Pricing = dynamic(() => import('@/pages/Pricing'));
 
 // import Navbar from '@/components/Navbar';
 
@@ -77,7 +80,7 @@ const Page = () => {
           <ImageSec/>
           <OurCrafts/>
           <Pricing/>
-        
+        <Testmonial/>
      
     </div>
   )

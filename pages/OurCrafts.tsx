@@ -55,7 +55,7 @@ const OurCrafts = () => {
           end: `+=${scrollDistance}`, 
           scrub: 1,                 
           pin: true, 
-          invalidateOnRefresh: true               
+          invalidateOnRefresh: true,               
         }
       });
     };
@@ -92,10 +92,9 @@ const OurCrafts = () => {
                 src={`/img/${value.img}`}
                 alt='hehehee'
                 fill
-                
+                sizes="(max-width: 768px) 100vw, 33vw"
                 quality={90}
                 className='object-cover'
-                priority
                 />
                 </div>
               <p className='font-manrope text-xl uppercase'>{value.cut}</p>
